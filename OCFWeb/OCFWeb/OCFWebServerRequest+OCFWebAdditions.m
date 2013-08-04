@@ -15,7 +15,7 @@
 @end
 
 
-@implementation OCFWebServerDataRequest (SinAdditions)
+@implementation OCFWebServerDataRequest (OCFAdditions)
 
 #pragma mark - Convenience
 - (NSData *)data_ocf {
@@ -24,7 +24,7 @@
 
 @end
 
-@implementation OCFWebServerFileRequest (SinAdditions)
+@implementation OCFWebServerFileRequest (OCFAdditions)
 
 #pragma mark - Convenience
 - (NSData *)data_ocf {
@@ -43,7 +43,7 @@
 
 @end
 
-@implementation OCFWebServerMultiPartFormRequest (SinAdditions)
+@implementation OCFWebServerMultiPartFormRequest (OCFAdditions)
 
 #pragma mark - Additional Parameters
 - (NSDictionary *)additionalParameters_ocf {

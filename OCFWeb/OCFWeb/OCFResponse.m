@@ -6,7 +6,7 @@ const struct OCFResponseAttributes OCFResponseAttributes = {
 	.body = @"body",
 };
 
-@implementation NSDictionary (SinResponseAdditions)
+@implementation NSDictionary (OCFResponseAdditions)
 
 - (NSInteger)status_ocf {
     NSNumber *status = self[OCFResponseAttributes.status];

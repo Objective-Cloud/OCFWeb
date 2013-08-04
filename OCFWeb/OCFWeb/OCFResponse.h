@@ -6,7 +6,7 @@ extern const struct OCFResponseAttributes {
 	__unsafe_unretained NSString *body;
 } OCFResponseAttributes;
 
-@interface NSDictionary (SinResponseAdditions)
+@interface NSDictionary (OCFResponseAdditions)
 
 - (NSInteger)status_ocf;
 - (NSDictionary *)headers_ocf;

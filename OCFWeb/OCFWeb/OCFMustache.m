@@ -21,7 +21,7 @@
 }
 
 - (id)init {
-    @throw [NSException exceptionWithName:@"SinInvalidInitializer" reason:nil userInfo:nil];
+    @throw [NSException exceptionWithName:@"OCFInvalidInitializer" reason:nil userInfo:nil];
 }
 
 + (OCFMustache *)newMustacheWithName:(NSString *)name object:(id)object {

@@ -114,8 +114,8 @@
             NSLog(@"[WebApplication] No route found for %@ %@.", request.method, request.path);
             OCFResponse *response = nil;
             if(weakSelf.delegate != nil && [weakSelf.delegate respondsToSelector:@selector(application:responseForRequestWithNoAssociatedHandler:)]) {
-                OCFRequest *sinRequest = [[OCFRequest alloc] initWithWebServerRequest:request parameters:nil];
-                response = [weakSelf.delegate application:weakSelf responseForRequestWithNoAssociatedHandler:sinRequest];
+                OCFRequest *webRequest = [[OCFRequest alloc] initWithWebServerRequest:request parameters:nil];
+                response = [weakSelf.delegate application:weakSelf responseForRequestWithNoAssociatedHandler:webRequest];
             } else {
                 // The delegate did not return anything useful so we have to generate a 404 response
                 response = [[OCFResponse alloc] initWithStatus:404 headers:nil body:nil];
@@ -126,23 +126,23 @@
         }
         
         NSDictionary *parameters = [weakSelf parametersFromRequest:request withRoute:route];
-        OCFRequest *sinRequest = [[OCFRequest alloc] initWithWebServerRequest:request parameters:parameters];
-        route.requestHandler(sinRequest, ^(id response) {
+        OCFRequest *webRequest = [[OCFRequest alloc] initWithWebServerRequest:request parameters:parameters];
+        route.requestHandler(webRequest, ^(id response) {
             if([response isKindOfClass:[OCFResponse class]]) {
                 responseBlock([weakSelf makeValidWebServerResponseWithResponse:response]);
                 return;
             }
             
             if([response isKindOfClass:[NSString class]]) {
-                OCFResponse *sinResponse = [[OCFResponse alloc] initWithStatus:0 headers:nil body:[response dataUsingEncoding:NSUTF8StringEncoding]];
-                responseBlock([weakSelf makeValidWebServerResponseWithResponse:sinResponse]);
+                OCFResponse *webRequest = [[OCFResponse alloc] initWithStatus:0 headers:nil body:[response dataUsingEncoding:NSUTF8StringEncoding]];
+                responseBlock([weakSelf makeValidWebServerResponseWithResponse:webRequest]);
                 return;
             }
             
             if([response isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *dictionaryResponse = response;
-                OCFResponse *sinResponse = [[OCFResponse alloc] initWithProperties:dictionaryResponse];
-                responseBlock([weakSelf makeValidWebServerResponseWithResponse:sinResponse]);
+                OCFResponse *webResponse = [[OCFResponse alloc] initWithProperties:dictionaryResponse];
+                responseBlock([weakSelf makeValidWebServerResponseWithResponse:webResponse]);
                 return;
             }
             
@@ -166,8 +166,8 @@
                     return;
                 }
                 
-                OCFResponse *sinResponse = [[OCFResponse alloc] initWithStatus:200 headers:nil body:[renderedObject dataUsingEncoding:NSUTF8StringEncoding]];
-                responseBlock([weakSelf makeValidWebServerResponseWithResponse:sinResponse]);
+                OCFResponse *webResponse = [[OCFResponse alloc] initWithStatus:200 headers:nil body:[renderedObject dataUsingEncoding:NSUTF8StringEncoding]];
+                responseBlock([weakSelf makeValidWebServerResponseWithResponse:webResponse]);
                 return;
             }
             responseBlock(nil); // FIXME: Terrasphere crashes
