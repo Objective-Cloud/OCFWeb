@@ -11,7 +11,7 @@
 @implementation OCFMustache
 
 #pragma mark - Creating a Mustache "Response"
-- (id)initWithName:(NSString *)name object:(id)object {
+- (instancetype)initWithName:(NSString *)name object:(id)object {
     self = [super init];
     if(self) {
         self.name = name;
@@ -20,11 +20,11 @@
     return self;
 }
 
-- (id)init {
+- (instancetype)init {
     @throw [NSException exceptionWithName:@"OCFInvalidInitializer" reason:nil userInfo:nil];
 }
 
-+ (OCFMustache *)newMustacheWithName:(NSString *)name object:(id)object {
++ (instancetype)newMustacheWithName:(NSString *)name object:(id)object {
     return [[[self class] alloc] initWithName:name object:object];
 }
 
