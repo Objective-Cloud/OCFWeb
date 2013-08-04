@@ -10,7 +10,6 @@
 		240D8007F64D4495AE0BA4D9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D92E6B0A2F124FD387BD48AC /* libPods.a */; };
 		AB94260F17AE51AB0053D2F6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB94260E17AE51AB0053D2F6 /* Cocoa.framework */; };
 		AB94261917AE51AB0053D2F6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB94261717AE51AB0053D2F6 /* InfoPlist.strings */; };
-		AB94261D17AE51AB0053D2F6 /* OCFWeb.m in Sources */ = {isa = PBXBuildFile; fileRef = AB94261C17AE51AB0053D2F6 /* OCFWeb.m */; };
 		AB94262517AE51AC0053D2F6 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB94262417AE51AC0053D2F6 /* SenTestingKit.framework */; };
 		AB94262617AE51AC0053D2F6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB94260E17AE51AB0053D2F6 /* Cocoa.framework */; };
 		AB94262917AE51AC0053D2F6 /* OCFWeb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB94260B17AE51AB0053D2F6 /* OCFWeb.framework */; };
@@ -62,7 +61,6 @@
 		AB94261817AE51AB0053D2F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AB94261A17AE51AB0053D2F6 /* OCFWeb-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OCFWeb-Prefix.pch"; sourceTree = "<group>"; };
 		AB94261B17AE51AB0053D2F6 /* OCFWeb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCFWeb.h; sourceTree = "<group>"; };
-		AB94261C17AE51AB0053D2F6 /* OCFWeb.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCFWeb.m; sourceTree = "<group>"; };
 		AB94262317AE51AC0053D2F6 /* OCFWebTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OCFWebTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB94262417AE51AC0053D2F6 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		AB94262C17AE51AC0053D2F6 /* OCFWebTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OCFWebTests-Info.plist"; sourceTree = "<group>"; };
@@ -161,30 +159,8 @@
 		AB94261417AE51AB0053D2F6 /* OCFWeb */ = {
 			isa = PBXGroup;
 			children = (
-				AB94263B17AE51DB0053D2F6 /* NSDictionary+OCFConfigurationAdditions.h */,
-				AB94263C17AE51DB0053D2F6 /* NSDictionary+OCFConfigurationAdditions.m */,
-				AB94263D17AE51DB0053D2F6 /* OCFMethodRoutesPair.h */,
-				AB94263E17AE51DB0053D2F6 /* OCFMethodRoutesPair.m */,
-				AB94263F17AE51DB0053D2F6 /* OCFMustache.h */,
-				AB94264017AE51DB0053D2F6 /* OCFMustache.m */,
-				AB94264117AE51DB0053D2F6 /* OCFRequest_Extension.h */,
-				AB94264217AE51DB0053D2F6 /* OCFRequest.h */,
-				AB94264317AE51DB0053D2F6 /* OCFRequest.m */,
-				AB94264417AE51DB0053D2F6 /* OCFRequest+Private.h */,
-				AB94264517AE51DB0053D2F6 /* OCFRequest+Private.m */,
-				AB94264617AE51DB0053D2F6 /* OCFResponse.h */,
-				AB94264717AE51DB0053D2F6 /* OCFResponse.m */,
-				AB94264817AE51DB0053D2F6 /* OCFRoute.h */,
-				AB94264917AE51DB0053D2F6 /* OCFRoute.m */,
-				AB94264A17AE51DB0053D2F6 /* OCFRouter.h */,
-				AB94264B17AE51DB0053D2F6 /* OCFRouter.m */,
-				AB94264C17AE51DB0053D2F6 /* OCFWebApplication.h */,
-				AB94264D17AE51DB0053D2F6 /* OCFWebApplication.m */,
-				AB94264E17AE51DB0053D2F6 /* OCFWebApplicationDelegate.h */,
-				AB94264F17AE51DB0053D2F6 /* OCFWebServerRequest+OCFWebAdditions.h */,
-				AB94265017AE51DB0053D2F6 /* OCFWebServerRequest+OCFWebAdditions.m */,
-				AB94261B17AE51AB0053D2F6 /* OCFWeb.h */,
-				AB94261C17AE51AB0053D2F6 /* OCFWeb.m */,
+				AB94266B17AE557D0053D2F6 /* Public API */,
+				AB94266C17AE559C0053D2F6 /* Implementation */,
 				AB94261517AE51AB0053D2F6 /* Supporting Files */,
 			);
 			path = OCFWeb;
@@ -217,6 +193,131 @@
 				AB94262D17AE51AC0053D2F6 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AB94266A17AE55680053D2F6 /* OCFWebServer Additions */ = {
+			isa = PBXGroup;
+			children = (
+				AB94264F17AE51DB0053D2F6 /* OCFWebServerRequest+OCFWebAdditions.h */,
+				AB94265017AE51DB0053D2F6 /* OCFWebServerRequest+OCFWebAdditions.m */,
+			);
+			name = "OCFWebServer Additions";
+			sourceTree = "<group>";
+		};
+		AB94266B17AE557D0053D2F6 /* Public API */ = {
+			isa = PBXGroup;
+			children = (
+				AB94261B17AE51AB0053D2F6 /* OCFWeb.h */,
+				AB94266D17AE55B40053D2F6 /* Web Application */,
+				AB94266E17AE55CA0053D2F6 /* Request */,
+				AB94266F17AE55D10053D2F6 /* Response */,
+			);
+			name = "Public API";
+			sourceTree = "<group>";
+		};
+		AB94266C17AE559C0053D2F6 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				AB94267517AE56280053D2F6 /* Configuration (Dictionary Additions) */,
+				AB94267617AE56380053D2F6 /* Request/Response */,
+				AB94267117AE55FD0053D2F6 /* Routing */,
+				AB94266A17AE55680053D2F6 /* OCFWebServer Additions */,
+			);
+			name = Implementation;
+			sourceTree = "<group>";
+		};
+		AB94266D17AE55B40053D2F6 /* Web Application */ = {
+			isa = PBXGroup;
+			children = (
+				AB94264C17AE51DB0053D2F6 /* OCFWebApplication.h */,
+				AB94264D17AE51DB0053D2F6 /* OCFWebApplication.m */,
+				AB94264E17AE51DB0053D2F6 /* OCFWebApplicationDelegate.h */,
+			);
+			name = "Web Application";
+			sourceTree = "<group>";
+		};
+		AB94266E17AE55CA0053D2F6 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				AB94264217AE51DB0053D2F6 /* OCFRequest.h */,
+				AB94264317AE51DB0053D2F6 /* OCFRequest.m */,
+			);
+			name = Request;
+			sourceTree = "<group>";
+		};
+		AB94266F17AE55D10053D2F6 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				AB94264617AE51DB0053D2F6 /* OCFResponse.h */,
+				AB94264717AE51DB0053D2F6 /* OCFResponse.m */,
+				AB94267017AE55D70053D2F6 /* Mustache Response */,
+			);
+			name = Response;
+			sourceTree = "<group>";
+		};
+		AB94267017AE55D70053D2F6 /* Mustache Response */ = {
+			isa = PBXGroup;
+			children = (
+				AB94263F17AE51DB0053D2F6 /* OCFMustache.h */,
+				AB94264017AE51DB0053D2F6 /* OCFMustache.m */,
+			);
+			name = "Mustache Response";
+			sourceTree = "<group>";
+		};
+		AB94267117AE55FD0053D2F6 /* Routing */ = {
+			isa = PBXGroup;
+			children = (
+				AB94267217AE56090053D2F6 /* OCFMethodRoutesPair */,
+				AB94267417AE561C0053D2F6 /* Route */,
+				AB94267317AE56160053D2F6 /* Router */,
+			);
+			name = Routing;
+			sourceTree = "<group>";
+		};
+		AB94267217AE56090053D2F6 /* OCFMethodRoutesPair */ = {
+			isa = PBXGroup;
+			children = (
+				AB94263D17AE51DB0053D2F6 /* OCFMethodRoutesPair.h */,
+				AB94263E17AE51DB0053D2F6 /* OCFMethodRoutesPair.m */,
+			);
+			name = OCFMethodRoutesPair;
+			sourceTree = "<group>";
+		};
+		AB94267317AE56160053D2F6 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				AB94264A17AE51DB0053D2F6 /* OCFRouter.h */,
+				AB94264B17AE51DB0053D2F6 /* OCFRouter.m */,
+			);
+			name = Router;
+			sourceTree = "<group>";
+		};
+		AB94267417AE561C0053D2F6 /* Route */ = {
+			isa = PBXGroup;
+			children = (
+				AB94264817AE51DB0053D2F6 /* OCFRoute.h */,
+				AB94264917AE51DB0053D2F6 /* OCFRoute.m */,
+			);
+			name = Route;
+			sourceTree = "<group>";
+		};
+		AB94267517AE56280053D2F6 /* Configuration (Dictionary Additions) */ = {
+			isa = PBXGroup;
+			children = (
+				AB94263B17AE51DB0053D2F6 /* NSDictionary+OCFConfigurationAdditions.h */,
+				AB94263C17AE51DB0053D2F6 /* NSDictionary+OCFConfigurationAdditions.m */,
+			);
+			name = "Configuration (Dictionary Additions)";
+			sourceTree = "<group>";
+		};
+		AB94267617AE56380053D2F6 /* Request/Response */ = {
+			isa = PBXGroup;
+			children = (
+				AB94264117AE51DB0053D2F6 /* OCFRequest_Extension.h */,
+				AB94264417AE51DB0053D2F6 /* OCFRequest+Private.h */,
+				AB94264517AE51DB0053D2F6 /* OCFRequest+Private.m */,
+			);
+			name = Request/Response;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,7 +482,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB94261D17AE51AB0053D2F6 /* OCFWeb.m in Sources */,
 				AB94265217AE51DB0053D2F6 /* NSDictionary+OCFConfigurationAdditions.m in Sources */,
 				AB94265417AE51DB0053D2F6 /* OCFMethodRoutesPair.m in Sources */,
 				AB94265617AE51DB0053D2F6 /* OCFMustache.m in Sources */,
