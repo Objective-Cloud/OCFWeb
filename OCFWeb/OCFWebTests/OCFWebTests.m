@@ -12,7 +12,7 @@
 @implementation OCFWebTests
 
 - (void)testParameters {
-    self.application[@"GET"][@"/houses/:house/persons/:person"] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
+    self.application[@"GET"][@"/houses/:house/persons/:person"] = ^(OCFRequest *request) {
         NSDictionary *parameters = request.parameters;
         STAssertNotNil(parameters, @"Parameters cannot be nil here.");
         NSString *house = parameters[@"house"];
@@ -27,10 +27,10 @@
         STAssertNotNil(urlParameterA, @"Invalid Parameters.");
         STAssertTrue([@"urlValueB" isEqualToString:urlParameterA], @"Invalid Parameter value.");
         
-        respondWith(@"OK");
+        request.respondWith(@"OK");
     };
     
-    self.application[@"GET"][@"/houses/:house/persons/:person"] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
+    self.application[@"GET"][@"/houses/:house/persons/:person"] = ^(OCFRequest *request) {
         NSDictionary *parameters = request.parameters;
         STAssertNotNil(parameters, @"Parameters cannot be nil here.");
         NSString *house = parameters[@"house"];
@@ -45,7 +45,7 @@
         STAssertNotNil(urlParameterA, @"Invalid Parameters.");
         STAssertTrue([@"urlValueB" isEqualToString:urlParameterA], @"Invalid Parameter value.");
         
-        respondWith(@"OK");
+        request.respondWith(@"OK");
     };
     [self.application run];
     
@@ -70,32 +70,32 @@
 
 - (void)testNoMatchingRoute {
     // Register a few routes
-    self.application[@"GET"][@"/"] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
-        respondWith(@"OK");
+    self.application[@"GET"][@"/"] = ^(OCFRequest *request) {
+        request.respondWith(@"OK");
     };
-    self.application[@"GET"][@"/persons"] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
-        respondWith(@"OK");
+    self.application[@"GET"][@"/persons"] = ^(OCFRequest *request) {
+        request.respondWith(@"OK");
     };
-    self.application[@"GET"][@"/persons/:person"] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
-        respondWith(@"OK");
+    self.application[@"GET"][@"/persons/:person"] = ^(OCFRequest *request) {
+        request.respondWith(@"OK");
     };
-    self.application[@"POST"][@"/"] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
-        respondWith(@"OK");
+    self.application[@"POST"][@"/"] = ^(OCFRequest *request) {
+        request.respondWith(@"OK");
     };
-    self.application[@"POST"][@"/persons" ] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
-        respondWith(@"OK");
+    self.application[@"POST"][@"/persons" ] = ^(OCFRequest *request) {
+        request.respondWith(@"OK");
     };
-    self.application[@"POST"][@"/persons/:person" ] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
-        respondWith(@"OK");
+    self.application[@"POST"][@"/persons/:person" ] = ^(OCFRequest *request) {
+        request.respondWith(@"OK");
     };
-    self.application[@"PUT"][@"/" ] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
-        respondWith(@"OK");
+    self.application[@"PUT"][@"/" ] = ^(OCFRequest *request) {
+        request.respondWith(@"OK");
     };
-    self.application[@"PUT"][@"/persons" ] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
-        respondWith(@"OK");
+    self.application[@"PUT"][@"/persons" ] = ^(OCFRequest *request) {
+        request.respondWith(@"OK");
     };
-    self.application[@"PUT"][@"/persons/:person" ] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
-        respondWith(@"OK");
+    self.application[@"PUT"][@"/persons/:person" ] = ^(OCFRequest *request) {
+        request.respondWith(@"OK");
     };
     [self.application run];
     
@@ -112,8 +112,8 @@
 }
 
 - (void)testRoutesWithMethodExpression {
-    self.application[@"\\b(GET|PUT)\\b"][@"/houses"] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
-        respondWith([@"houses: " stringByAppendingString:request.method]);
+    self.application[@"\\b(GET|PUT)\\b"][@"/houses"] = ^(OCFRequest *request) {
+        request.respondWith([@"houses: " stringByAppendingString:request.method]);
     };
     [self.application run];
     
@@ -125,8 +125,8 @@
 }
 
 - (void)testRoutes {
-    self.application[@"GET"][@"/"]  = ^(OCFRequest *request, OCFResponseHandler respondWith) {
-        respondWith(@"OK");
+    self.application[@"GET"][@"/"]  = ^(OCFRequest *request) {
+        request.respondWith(@"OK");
     };
     [self.application run];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.applicationURL];
@@ -144,8 +144,8 @@
                           @{ @"firstName" : @"amin", @"lastName" : @"negm-awad" },
                           @{ @"firstName" : @"bill", @"lastName" : @"gates" } ];
     
-    self.application[@"GET"][@"/persons"] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
-        respondWith([OCFMustache newMustacheWithName:@"Persons" object:@{@"persons" : persons}]);
+    self.application[@"GET"][@"/persons"] = ^(OCFRequest *request) {
+        request.respondWith([OCFMustache newMustacheWithName:@"Persons" object:@{@"persons" : persons}]);
     };
     
     [self.application run];
