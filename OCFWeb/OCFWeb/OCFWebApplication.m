@@ -36,16 +36,25 @@
 //    }
 //}
 
-#pragma mark - Properties
 #pragma mark - Creating an Application
-- (id)init {
+
+// This initializer is meant to be for testing purposes only.
+// The reason is that OCFWebApplication needs to know the bundle of the enclosing
+// application to that it can find the templates for the Mustache template engine.
+// You should have no need to use this initializer at all. Using -init is good enough.
+- (instancetype)initWithBundle:(NSBundle *)bundle {
     self = [super init];
     if(self) {
         self.router = [OCFRouter new];
-        self.templateRepository = [GRMustacheTemplateRepository templateRepositoryWithBundle:[NSBundle mainBundle]];
+        self.templateRepository = [GRMustacheTemplateRepository templateRepositoryWithBundle:(bundle != nil ? bundle : [NSBundle mainBundle])];
         [self _setupDefaultConfiguration];
     }
     return self;
+
+}
+
+- (instancetype)init {
+    return [self initWithBundle:nil];
 }
 
 - (void)_setupDefaultConfiguration {

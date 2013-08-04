@@ -185,7 +185,7 @@
 #pragma mark - Setup + Tear Down
 - (void)setUp {
     [super setUp];
-    self.application = [OCFWebApplication new];
+    self.application = [[OCFWebApplication alloc] initWithBundle:[NSBundle bundleForClass:[self class]]];
 }
 
 - (void)tearDown{
