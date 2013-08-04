@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
 
+@class OCFResponse;
+
 @interface OCFRequest : NSObject
 
 #pragma mark - Properties
@@ -11,6 +13,9 @@
 @property (nonatomic, copy, readonly) NSString *contentType;
 @property (nonatomic, assign, readonly) NSUInteger contentLength;
 @property (nonatomic, copy, readonly) NSData *data; // not the raw contents of the request
-@property (nonatomic, copy, readonly) NSDictionary *parameters; // union of GET, POST and Pattern-Parameters 
+@property (nonatomic, copy, readonly) NSDictionary *parameters; // union of GET, POST and Pattern-Parameters
+
+#pragma mark - Creating Response Objects from Request Objects
+- (OCFResponse *)redirectedTo:(NSString *)path;
 
 @end

@@ -23,7 +23,8 @@
     
     self.app[@"POST"][@"/persons"]  = ^(OCFRequest *request, OCFResponseHandler respondWith) {
         [self.persons addObject:request.parameters];
-        respondWith(@"Added!");
+        respondWith([request redirectedTo:@"/persons"]);
+//        respondWith(@"Added!");
     };
     
     [self.app run];
