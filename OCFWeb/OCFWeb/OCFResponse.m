@@ -70,6 +70,6 @@ const struct OCFResponseAttributes OCFResponseAttributes = {
 
 #pragma mark - NSObject
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<%@: %p> Status: %li, Headers: %@", NSStringFromClass([self class]), self, self.status, self.headers];
+    return [NSString stringWithFormat:@"<%@: %p> Status: %li, Headers: %@", NSStringFromClass([self class]), self, (long)self.status, self.headers];
 }
 @end

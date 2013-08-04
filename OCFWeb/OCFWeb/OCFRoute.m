@@ -3,7 +3,7 @@
 // https://github.com/Objective-Cloud/OCFWeb
 
 #import "OCFRoute.h"
-#import "SOCKit.h"
+#import <SOCKit/SOCKit.h>
 
 @interface OCFRoute ()
 

@@ -5,7 +5,7 @@
 #import "OCFMethodRoutesPair.h"
 #import "OCFRoute.h"
 
-#import "SOCKit.h"
+#import <SOCKit/SOCKit.h>
 #import <objc/runtime.h>
 
 @interface OCFMethodRoutesPair ()

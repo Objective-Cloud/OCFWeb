@@ -6,7 +6,7 @@
 #import "OCFMethodRoutesPair.h"
 #import "OCFRoute.h"
 
-#import "SOCKit.h"
+#import <SOCKit/SOCKit.h>
 
 @interface OCFRouter ()
 

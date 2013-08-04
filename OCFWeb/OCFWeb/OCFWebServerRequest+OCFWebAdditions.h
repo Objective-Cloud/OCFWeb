@@ -2,7 +2,7 @@
 // Copyright (c) 2013 Objective-Cloud (chris@objective-cloud.com)
 // https://github.com/Objective-Cloud/OCFWeb
 
-#import "OCFWebServerRequest.h"
+#import <OCFWebServer/OCFWebServerRequest.h>
 
 @interface OCFWebServerRequest (OCFWebAdditions)
 
