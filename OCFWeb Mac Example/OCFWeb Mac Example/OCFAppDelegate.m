@@ -11,9 +11,9 @@
 @implementation OCFAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
-    self.persons = [@[ @{ @"id" : @1, @"firstName" : @"christian", @"lastName" : @"kienle" },
-                       @{ @"id" : @2, @"firstName" : @"amin", @"lastName" : @"negm-awad" },
-                       @{ @"id" : @3, @"firstName" : @"bill", @"lastName" : @"gates" } ] mutableCopy];
+    self.persons = [@[ @{ @"id" : @1, @"firstName" : @"Christian", @"lastName" : @"Kienle" },
+                       @{ @"id" : @2, @"firstName" : @"Amin", @"lastName" : @"Negm-awad" },
+                       @{ @"id" : @3, @"firstName" : @"Bill", @"lastName" : @"Gates" } ] mutableCopy];
 
     self.app = [OCFWebApplication new];
     
@@ -21,12 +21,34 @@
         respondWith([OCFMustache newMustacheWithName:@"Persons" object:@{@"persons" : self.persons}]);
     };
     
+    self.app[@"GET"][@"/persons/:id"]  = ^(OCFRequest *request, OCFResponseHandler respondWith) {
+        NSNumber *personID = @([request.parameters[@"id"] integerValue]);
+        
+        
+        // Find the person
+        for(NSDictionary *person in self.persons) {
+            if([person[@"id"] isEqualToNumber:personID]) {
+                respondWith([OCFMustache newMustacheWithName:@"PersonDetail" object:person]);
+                return; // person found
+            }
+        }
+        respondWith(@"Error: No Person found");
+    };
+    
     self.app[@"POST"][@"/persons"]  = ^(OCFRequest *request, OCFResponseHandler respondWith) {
         NSMutableDictionary *person = [NSMutableDictionary dictionaryWithDictionary:request.parameters];
         person[@"id"] = @(self.persons.count + 1);
         [self.persons addObject:person];
+        
         respondWith([request redirectedTo:@"/persons"]);
     };
+
+    self.app[@"POST"][@"/persons/:id"]  = ^(OCFRequest *request, OCFResponseHandler respondWith) {
+        respondWith([request redirectedTo:@"/persons"]);
+    };
+    
+    
+
     
     [self.app run];
     
