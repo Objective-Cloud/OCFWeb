@@ -19,8 +19,8 @@ The following code snippet shows you how to create a web application that respon
   // Add a handler for GET requests
   self.app[@"GET"][@"/"]  = ^(OCFRequest *request) {
     // request contains a lot of properties which describe the incoming request.
-    
     // Respond to the request:
+
     request.respondWith(@"Hello World");
   };
       
@@ -74,39 +74,43 @@ The first example shows how easy it is to create a response for an incoming requ
 ## Example: String Response
 The following example shows how to create a response by returning a simple string.
 
-    self.app = [OCFWebApplication new];    
-    self.app[@"GET"][@"/"] = ^(OCFRequest *request) {
-      request.respondWith(@{ @"Hello World. I am a string." });
-    };
-    [self.application runOnPort:8080];
+```objective-c
+self.app = [OCFWebApplication new];    
+self.app[@"GET"][@"/"] = ^(OCFRequest *request) {
+  request.respondWith(@{ @"Hello World. I am a string." });
+};
+[self.application runOnPort:8080];
+```
 
 This creates a `plain/text` response with a status code of 201. If you don't like the content type or status code for string responses you can change it on a per application basis.
 
 ## Example: Dictionary Response
 The following example shows how to create a response by returning a dictionary. If you run this example you should be able to use your browser to access the web application which should display your application icon.
-
-    self.app = [OCFWebApplication new];    
-    self.app[@"GET"][@"/"] = ^(OCFRequest *request) {
-      NSImage *image = [NSImage imageNamed:@"NSApplicationIcon"];
-      request.respondWith(@{ @"status" : @201,
-                             @"body" : [image TIFFRepresentation],
-                             @"headers" : @{ @"Content-Type" : @"image/tiff" }});
-    };
-    [self.application runOnPort:8080];
-
+```objective-c
+self.app = [OCFWebApplication new];    
+self.app[@"GET"][@"/"] = ^(OCFRequest *request) {
+  NSImage *image = [NSImage imageNamed:@"NSApplicationIcon"];
+  request.respondWith(@{ @"status" : @201,
+                         @"body" : [image TIFFRepresentation],
+                         @"headers" : @{ @"Content-Type" : @"image/tiff" }});
+};
+[self.application runOnPort:8080];
+```
 ## Example: Mustache Response
 For the following example to work there must be a file called `Detail.mustache` in the resources of your application. Before using a mustache response you should read the [documentation of the mustache library used by OCFWeb](https://github.com/groue/GRMustache#grmustache). A mustache file basically contains text with placeholders and the underlying mustache engine can automatically fill in the details for you.
 
-    self.app = [OCFWebApplication new];
-    self.app[@"GET"][@"/"]  = ^(OCFRequest *request) {
-      NSDictionary *person = @{ @"id" : @1,
-                                @"firstName" : @"Christian",
-                                @"lastName" : @"Kienle" };
-      OCFMustache *response = [OCFMustache newMustacheWithName:@"Detail"
-                                                        object:person];
-      request.respondWith(response);
-    };
-    [self.app runOnPort:8080];
+```objective-c
+self.app = [OCFWebApplication new];
+self.app[@"GET"][@"/"]  = ^(OCFRequest *request) {
+  NSDictionary *person = @{ @"id" : @1,
+                            @"firstName" : @"Christian",
+                            @"lastName" : @"Kienle" };
+  OCFMustache *response = [OCFMustache newMustacheWithName:@"Detail"
+                                                    object:person];
+  request.respondWith(response);
+};
+[self.app runOnPort:8080];
+```
 
 # Routing and Parameters
 When adding a request handler you have to specify a HTTP method and a path. In the examples above we used `GET` as the HTTP method and `/` as the path. OCFWeb let's you do more sophisticated things though.
@@ -124,11 +128,13 @@ Let's assume you want to add and implement a handler that displays a specific st
 ## Example: A Route with Placeholders
 The following example shows you how to register a handler that is only executed if the request path is matching a specific pattern.
 
-    self.app = [OCFWebApplication new];
-    self.app[@"GET"][@"/countries/:country/states/:state/"] = ^(OCFRequest *request) {
-      request.respondWith([request.parameters description]);
-    };
-    [self.application run];
+```objective-c
+self.app = [OCFWebApplication new];
+self.app[@"GET"][@"/countries/:country/states/:state/"] = ^(OCFRequest *request) {
+  request.respondWith([request.parameters description]);
+};
+[self.application run];
+```
 
 The pattern used (`/countries/:country/states/:state/`) has two placeholders:
 
