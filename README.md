@@ -5,30 +5,31 @@ OCFWeb is a web application framework written in Objective-C. You can use OCFWeb
 
 # Example: Hello World
 The following code snippet shows you how to create a web application that responds to GET requests made to `/`.
+```objective-c
+@interface AppDelegate ()
+@property (nonatomic, strong) OCFWebApplication *app;
+@end
 
-    @interface AppDelegate ()
-    @property (nonatomic, strong) OCFWebApplication *app;
-    @end
+@implementation AppDelegate 
 
-    @implementation AppDelegate 
-
-    - (void)applicationDidFinishLaunching:(NSNotification *)n {
-      // Create a instance of OCFWebApplication
-      self.app = [OCFWebApplication new];
+- (void)applicationDidFinishLaunching:(NSNotification *)n {
+  // Create a instance of OCFWebApplication
+  self.app = [OCFWebApplication new];
+  
+  // Add a handler for GET requests
+  self.app[@"GET"][@"/"]  = ^(OCFRequest *request) {
+    // request contains a lot of properties which describe the incoming request.
+    
+    // Respond to the request:
+    request.respondWith(@"Hello World");
+  };
       
-      // Add a handler for GET requests
-      self.app[@"GET"][@"/"]  = ^(OCFRequest *request) {
-        // request contains a lot of properties which describe the incoming request.
-        
-        // Respond to the request:
-        request.respondWith(@"Hello World");
-      };
-      
-      // Run your app on port 8080
-      [self.app runOnPort:8080];
-    }
-    @end
+  // Run your app on port 8080
+  [self.app runOnPort:8080];
+}
 
+@end
+```
 Opening [http://127.0.0.1:8080/](http://127.0.0.1:8080/) in your browser should show a web site with the words "Hello World" on it. Nice isn't it? Let's examine the code a little bit more:
 
 * First you create an instance of `OCFWebApplication` by using the `+new` class method. This creates a blank web application for you that does nothing useful.
