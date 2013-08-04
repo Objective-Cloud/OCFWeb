@@ -117,6 +117,13 @@
     } processBlock:^void(OCFWebServerRequest *request, OCFWebServerResponseBlock responseBlock) {
         NSString *requestMethod = request.method;
 
+        
+        // Method Overriding
+        NSDictionary *requestParameters = [request additionalParameters_ocf];
+        if(requestParameters[@"_method"] != nil) {
+            requestMethod = requestParameters[@"_method"];
+        }
+        
         OCFRoute *route = [weakSelf.router routeForRequestWithMethod:requestMethod requestPath:request.path];
         
         if(route == nil) {
@@ -135,6 +142,7 @@
         }
         
         NSDictionary *parameters = [weakSelf parametersFromRequest:request withRoute:route];
+
         OCFRequest *webRequest = [[OCFRequest alloc] initWithWebServerRequest:request parameters:parameters];
         route.requestHandler(webRequest, ^(id response) {
             if([response isKindOfClass:[OCFResponse class]]) {

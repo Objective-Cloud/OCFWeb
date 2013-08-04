@@ -14,4 +14,8 @@
 #pragma mark - Working with the Route
 - (NSDictionary *)parametersWithRequestPath:(NSString *)path;
 
+#pragma mark - Getting parameters from a Path
+// This method can be used to get the parameters of a path/pattern pair without having a route.
++ (NSDictionary *)parametersWithRequestPath:(NSString *)path byUsingPattern:(NSString *)pattern;
+
 @end
