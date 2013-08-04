@@ -144,7 +144,7 @@
         NSDictionary *parameters = [weakSelf parametersFromRequest:request withRoute:route];
 
         OCFRequest *webRequest = [[OCFRequest alloc] initWithWebServerRequest:request parameters:parameters];
-        route.requestHandler(webRequest, ^(id response) {
+        [webRequest setRespondWith:^(id response) {
             if([response isKindOfClass:[OCFResponse class]]) {
                 responseBlock([weakSelf makeValidWebServerResponseWithResponse:response]);
                 return;
@@ -189,7 +189,9 @@
             }
             responseBlock(nil); // FIXME: Terrasphere crashes
             return;
-        });
+        }];
+        
+        route.requestHandler(webRequest);
     }];
     [self.server startWithPort:port bonjourName:nil];
 }

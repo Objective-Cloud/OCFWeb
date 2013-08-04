@@ -17,41 +17,41 @@
 
     self.app = [OCFWebApplication new];
     
-    self.app[@"GET"][@"/persons"]  = ^(OCFRequest *request, OCFResponseHandler respondWith) {
-        respondWith([OCFMustache newMustacheWithName:@"Persons" object:@{@"persons" : self.persons}]);
+    self.app[@"GET"][@"/persons"]  = ^(OCFRequest *request) {
+        request.respondWith([OCFMustache newMustacheWithName:@"Persons" object:@{@"persons" : self.persons}]);
     };
     
-    self.app[@"GET"][@"/persons/:id"]  = ^(OCFRequest *request, OCFResponseHandler respondWith) {
+    self.app[@"GET"][@"/persons/:id"]  = ^(OCFRequest *request) {
         NSNumber *personID = @([request.parameters[@"id"] integerValue]);
         
         // Find the person
         for(NSDictionary *person in self.persons) {
             if([person[@"id"] isEqualToNumber:personID]) {
-                respondWith([OCFMustache newMustacheWithName:@"PersonDetail" object:person]);
+                request.respondWith([OCFMustache newMustacheWithName:@"PersonDetail" object:person]);
                 return; // person found
             }
         }
-        respondWith(@"Error: No Person found");
+        request.respondWith(@"Error: No Person found");
     };
     
-    self.app[@"POST"][@"/persons"]  = ^(OCFRequest *request, OCFResponseHandler respondWith) {
+    self.app[@"POST"][@"/persons"]  = ^(OCFRequest *request) {
         NSMutableDictionary *person = [NSMutableDictionary dictionaryWithDictionary:request.parameters];
         person[@"id"] = @(self.persons.count + 1);
         [self.persons addObject:person];
         
-        respondWith([request redirectedTo:@"/persons"]);
+        request.respondWith([request redirectedTo:@"/persons"]);
     };
 
-    self.app[@"PUT"][@"/persons/:id"]  = ^(OCFRequest *request, OCFResponseHandler respondWith) {
+    self.app[@"PUT"][@"/persons/:id"]  = ^(OCFRequest *request) {
         NSNumber *personID = @([request.parameters[@"id"] integerValue]);
         for(NSMutableDictionary *person in self.persons) {
             if([person[@"id"] isEqualToNumber:personID]) {
                 [person setValuesForKeysWithDictionary:request.parameters];
-                respondWith([request redirectedTo:@"/persons"]);
+                request.respondWith([request redirectedTo:@"/persons"]);
                 return; // person updated
             }
         }
-        respondWith(@"Error: No Person found");
+        request.respondWith(@"Error: No Person found");
     };
     
         [self.app run];
