@@ -34,17 +34,6 @@
     return [patternMatcher parameterDictionaryFromSourceString:path];
 }
 
-#pragma mark - Getting parameters from a Path
-+ (NSDictionary *)parametersWithRequestPath:(NSString *)path byUsingPattern:(NSString *)pattern {
-    if(pattern == nil || path == nil) {
-        NSLog(@"WARNING: %@ has been called with nil arguments. Returning empty dictionary.", NSStringFromSelector(_cmd));
-        return @{};
-    }
-    SOCPattern *patternMatcher = [SOCPattern patternWithString:pattern];
-    return [patternMatcher parameterDictionaryFromSourceString:path];
-}
-
-
 #pragma mark - NSObject
 - (NSString *)description {
     return [[super description] stringByAppendingFormat:@" pattern: '%@'", self.pattern];
