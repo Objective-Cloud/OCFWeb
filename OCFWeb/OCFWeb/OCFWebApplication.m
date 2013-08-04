@@ -8,10 +8,10 @@
 
 #import "NSDictionary+OCFConfigurationAdditions.h"
 #import "OCFWebServerRequest+OCFWebAdditions.h"
-#import "GRMustache.h"
 
 // 3rd. Party =>
-#import "OCFWebServer.h"
+#import <GRMustache/GRMustache.h>
+#import <OCFWebServer/OCFWebServer.h>
 
 @interface OCFWebApplication ()
 
@@ -64,15 +64,11 @@
     self[methodPattern][pathPattern] = requestHandler;
 }
 
-//- (void)handle:(NSString *)methodPattern requestsMatching:(NSString *)pathPattern withAsyncBlock:(OCFWebApplicationAsyncRequestHandler)requestHandler {
-//    
-//}
-
 - (id)objectForKeyedSubscript:(id <NSCopying>)key {
-    // key is a HTTP method regular expression
     NSParameterAssert(key);
     NSParameterAssert([object_getClass(key) isSubclassOfClass:[NSString class]]); // make sure key is a string
     
+    // key is a HTTP method regular expression
     // -methodRoutesPairForRequestWithMethodPattern: creates the pair object if it does not already exist.
     return [self.router methodRoutesPairForRequestWithMethodPattern:(NSString *)key];
 }
@@ -131,7 +127,6 @@
         
         NSDictionary *parameters = [weakSelf parametersFromRequest:request withRoute:route];
         OCFRequest *sinRequest = [[OCFRequest alloc] initWithWebServerRequest:request parameters:parameters];
-//        id response = route.requestHandler(sinRequest);
         route.requestHandler(sinRequest, ^(id response) {
             if([response isKindOfClass:[OCFResponse class]]) {
                 responseBlock([weakSelf makeValidWebServerResponseWithResponse:response]);

@@ -13,7 +13,7 @@
 
 
 - (void)testParameters {
-    self.application[@"GET"][@"/houses/:house/persons/:person"] = ^(OCFRequest *request, OCFWebApplicationResponseAvailable respondWith) {
+    self.application[@"GET"][@"/houses/:house/persons/:person"] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
         NSDictionary *parameters = request.parameters;
         STAssertNotNil(parameters, @"Parameters cannot be nil here.");
         NSString *house = parameters[@"house"];
@@ -31,7 +31,7 @@
         respondWith(@"OK");
     };
     
-    self.application[@"GET"][@"/houses/:house/persons/:person"] = ^(OCFRequest *request, OCFWebApplicationResponseAvailable respondWith) {
+    self.application[@"GET"][@"/houses/:house/persons/:person"] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
         NSDictionary *parameters = request.parameters;
         STAssertNotNil(parameters, @"Parameters cannot be nil here.");
         NSString *house = parameters[@"house"];
@@ -71,31 +71,31 @@
 
 - (void)testNoMatchingRoute {
     // Register a few routes
-    self.application[@"GET"][@"/"] = ^(OCFRequest *request, OCFWebApplicationResponseAvailable respondWith) {
+    self.application[@"GET"][@"/"] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
         respondWith(@"OK");
     };
-    self.application[@"GET"][@"/persons"] = ^(OCFRequest *request, OCFWebApplicationResponseAvailable respondWith) {
+    self.application[@"GET"][@"/persons"] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
         respondWith(@"OK");
     };
-    self.application[@"GET"][@"/persons/:person"] = ^(OCFRequest *request, OCFWebApplicationResponseAvailable respondWith) {
+    self.application[@"GET"][@"/persons/:person"] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
         respondWith(@"OK");
     };
-    self.application[@"POST"][@"/"] = ^(OCFRequest *request, OCFWebApplicationResponseAvailable respondWith) {
+    self.application[@"POST"][@"/"] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
         respondWith(@"OK");
     };
-    self.application[@"POST"][@"/persons" ] = ^(OCFRequest *request, OCFWebApplicationResponseAvailable respondWith) {
+    self.application[@"POST"][@"/persons" ] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
         respondWith(@"OK");
     };
-    self.application[@"POST"][@"/persons/:person" ] = ^(OCFRequest *request, OCFWebApplicationResponseAvailable respondWith) {
+    self.application[@"POST"][@"/persons/:person" ] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
         respondWith(@"OK");
     };
-    self.application[@"PUT"][@"/" ] = ^(OCFRequest *request, OCFWebApplicationResponseAvailable respondWith) {
+    self.application[@"PUT"][@"/" ] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
         respondWith(@"OK");
     };
-    self.application[@"PUT"][@"/persons" ] = ^(OCFRequest *request, OCFWebApplicationResponseAvailable respondWith) {
+    self.application[@"PUT"][@"/persons" ] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
         respondWith(@"OK");
     };
-    self.application[@"PUT"][@"/persons/:person" ] = ^(OCFRequest *request, OCFWebApplicationResponseAvailable respondWith) {
+    self.application[@"PUT"][@"/persons/:person" ] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
         respondWith(@"OK");
     };
     [self.application run];
@@ -113,7 +113,7 @@
 }
 
 - (void)testRoutesWithMethodExpression {
-    self.application[@"\\b(GET|PUT)\\b"][@"/houses"] = ^(OCFRequest *request, OCFWebApplicationResponseAvailable respondWith) {
+    self.application[@"\\b(GET|PUT)\\b"][@"/houses"] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
         respondWith([@"houses: " stringByAppendingString:request.method]);
     };
     [self.application run];
@@ -126,7 +126,7 @@
 }
 
 - (void)testRoutes {
-    self.application[@"GET"][@"/"]  = ^(OCFRequest *request, OCFWebApplicationResponseAvailable respondWith) {
+    self.application[@"GET"][@"/"]  = ^(OCFRequest *request, OCFResponseHandler respondWith) {
         respondWith(@"OK");
     };
     [self.application run];

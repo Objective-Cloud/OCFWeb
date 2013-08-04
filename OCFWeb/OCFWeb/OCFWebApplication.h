@@ -3,8 +3,8 @@
 @class OCFRequest;
 @protocol OCFWebApplicationDelegate;
 
-typedef void(^OCFWebApplicationResponseAvailable)(id response);
-typedef void(^OCFWebApplicationRequestHandler)(OCFRequest *request, OCFWebApplicationResponseAvailable respondWith);
+typedef void(^OCFResponseHandler)(id response);
+typedef void(^OCFWebApplicationRequestHandler)(OCFRequest *request, OCFResponseHandler respondWith);
 
 @interface OCFWebApplication : NSObject
 
