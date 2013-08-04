@@ -11,7 +11,6 @@
 
 @implementation OCFWebTests
 
-
 - (void)testParameters {
     self.application[@"GET"][@"/houses/:house/persons/:person"] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
         NSDictionary *parameters = request.parameters;
@@ -138,6 +137,35 @@
     STAssertNotNil(responseBody, @"Error: %@", error);
     NSString *responseString = [[NSString alloc] initWithData:responseBody encoding:NSUTF8StringEncoding];
     STAssertTrue([responseString isEqualToString:@"OK"], @"FAIL");
+}
+
+- (void)testTemplateEngine {
+    NSArray *persons = @[ @{ @"firstName" : @"christian", @"lastName" : @"kienle" },
+                          @{ @"firstName" : @"amin", @"lastName" : @"negm-awad" },
+                          @{ @"firstName" : @"bill", @"lastName" : @"gates" } ];
+    
+    self.application[@"GET"][@"/persons"] = ^(OCFRequest *request, OCFResponseHandler respondWith) {
+        respondWith([OCFMustache newMustacheWithName:@"Persons" object:@{@"persons" : persons}]);
+    };
+    
+    [self.application run];
+    
+    NSURL *URL = [NSURL URLWithString:@"/persons" relativeToURL:self.applicationURL];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    request.HTTPMethod = @"GET";
+    NSError *error = nil;
+    NSHTTPURLResponse *response = nil;
+    NSData *responseBody = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    STAssertNotNil(responseBody, @"Error: %@", error);
+    NSString *responseString = [[NSString alloc] initWithData:responseBody encoding:NSUTF8StringEncoding];
+    
+    // Build the string that we expect to see
+    NSMutableString *expectedResponseString = [NSMutableString new];
+    for(NSDictionary *person in persons) {
+        [expectedResponseString appendFormat:@"fn: %@ ln: %@", person[@"firstName"], person[@"lastName"]];
+    }
+    
+    STAssertTrue([responseString isEqualToString:expectedResponseString], @"FAIL");
 }
 
 #pragma mark - Properties

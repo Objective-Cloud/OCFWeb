@@ -38,6 +38,7 @@
 		AB94266517AE51DB0053D2F6 /* OCFWebServerRequest+OCFWebAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94264F17AE51DB0053D2F6 /* OCFWebServerRequest+OCFWebAdditions.h */; };
 		AB94266617AE51DB0053D2F6 /* OCFWebServerRequest+OCFWebAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AB94265017AE51DB0053D2F6 /* OCFWebServerRequest+OCFWebAdditions.m */; };
 		AB94266917AE53E70053D2F6 /* OCFWeb.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94261B17AE51AB0053D2F6 /* OCFWeb.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AB94267B17AE629C0053D2F6 /* Persons.mustache in Resources */ = {isa = PBXBuildFile; fileRef = AB94267917AE629C0053D2F6 /* Persons.mustache */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		AB94264E17AE51DB0053D2F6 /* OCFWebApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCFWebApplicationDelegate.h; sourceTree = "<group>"; };
 		AB94264F17AE51DB0053D2F6 /* OCFWebServerRequest+OCFWebAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OCFWebServerRequest+OCFWebAdditions.h"; sourceTree = "<group>"; };
 		AB94265017AE51DB0053D2F6 /* OCFWebServerRequest+OCFWebAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OCFWebServerRequest+OCFWebAdditions.m"; sourceTree = "<group>"; };
+		AB94267A17AE629C0053D2F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/Persons.mustache; sourceTree = "<group>"; };
 		D92E6B0A2F124FD387BD48AC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -189,6 +191,7 @@
 		AB94262B17AE51AC0053D2F6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AB94267817AE62800053D2F6 /* Templates */,
 				AB94262C17AE51AC0053D2F6 /* OCFWebTests-Info.plist */,
 				AB94262D17AE51AC0053D2F6 /* InfoPlist.strings */,
 			);
@@ -320,6 +323,14 @@
 			name = Request/Response;
 			sourceTree = "<group>";
 		};
+		AB94267817AE62800053D2F6 /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				AB94267917AE629C0053D2F6 /* Persons.mustache */,
+			);
+			name = Templates;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -426,6 +437,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB94262F17AE51AC0053D2F6 /* InfoPlist.strings in Resources */,
+				AB94267B17AE629C0053D2F6 /* Persons.mustache in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +540,14 @@
 				AB94262E17AE51AC0053D2F6 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AB94267917AE629C0053D2F6 /* Persons.mustache */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB94267A17AE629C0053D2F6 /* en */,
+			);
+			name = Persons.mustache;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

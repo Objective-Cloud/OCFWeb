@@ -30,7 +30,7 @@
 		AB9425F617AE512C0053D2F6 /* OCFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCFAppDelegate.h; sourceTree = "<group>"; };
 		AB9425F717AE512C0053D2F6 /* OCFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCFAppDelegate.m; sourceTree = "<group>"; };
 		AB9425FA17AE512C0053D2F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		AB94266717AE51E70053D2F6 /* OCFWeb.framework */ = {isa = PBXFileReference; lastKnownFileType = file; name = OCFWeb.framework; path = ../OCFWeb/build/Release/OCFWeb.framework; sourceTree = "<group>"; };
+		AB94266717AE51E70053D2F6 /* OCFWeb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCFWeb.framework; path = ../OCFWeb/build/Release/OCFWeb.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +308,7 @@
 				AB94260017AE512C0053D2F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
