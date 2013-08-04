@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "OCFWeb"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "A small and imperfect web application framework written in Objective-C."
   s.description  = <<-DESC
 OCFWeb is a web application framework written in Objective-C. You can use OCFWeb to create web applications with just a few lines of code. Although OCFWeb is developed and used by Objective-Cloud.com it does not depend on Objective-Cloud.com.
@@ -9,7 +9,7 @@ OCFWeb is a web application framework written in Objective-C. You can use OCFWeb
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
 
   s.author       = { "ChristianKienle" => "chris@objective-cloud.com"}
-  s.source       = { :git => "https://github.com/Objective-Cloud/OCFWeb.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/Objective-Cloud/OCFWeb.git", :tag => "0.0.2" }
 
   s.ios.deployment_target = '6.0'
   s.osx.deployment_target = '10.8'
