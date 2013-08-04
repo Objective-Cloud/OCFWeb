@@ -38,7 +38,7 @@ const struct OCFResponseAttributes OCFResponseAttributes = {
 @implementation OCFResponse
 
 #pragma mark - Creating
-- (id)initWithStatus:(NSInteger)status headers:(NSDictionary *)headers body:(NSData *)body {
+- (instancetype)initWithStatus:(NSInteger)status headers:(NSDictionary *)headers body:(NSData *)body {
     self = [super init];
     if(self) {
         self.status = status;
@@ -48,14 +48,14 @@ const struct OCFResponseAttributes OCFResponseAttributes = {
     return self;
 }
 
-- (id)initWithProperties:(NSDictionary *)properties {
+- (instancetype)initWithProperties:(NSDictionary *)properties {
     NSInteger status = [properties status_ocf];
     NSDictionary *headers = [properties headers_ocf];
     NSData *body = [properties body_ocf];
     return [self initWithStatus:status headers:headers body:body];
 }
 
-- (id)init {
+- (instancetype)init {
     return [self initWithStatus:0 headers:nil body:nil];
 }
 

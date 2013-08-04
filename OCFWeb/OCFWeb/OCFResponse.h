@@ -17,8 +17,8 @@ extern const struct OCFResponseAttributes {
 @interface OCFResponse : NSObject
 
 #pragma mark - Creating
-- (id)initWithStatus:(NSInteger)status headers:(NSDictionary *)headers body:(NSData *)body;
-- (id)initWithProperties:(NSDictionary *)properties;
+- (instancetype)initWithStatus:(NSInteger)status headers:(NSDictionary *)headers body:(NSData *)body;
+- (instancetype)initWithProperties:(NSDictionary *)properties;
 
 #pragma mark - Properties
 @property (nonatomic, assign, readonly) NSInteger status;

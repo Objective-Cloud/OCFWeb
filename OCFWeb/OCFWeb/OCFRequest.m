@@ -8,7 +8,7 @@
 @implementation OCFRequest
 
 #pragma mark - Creating a Request
-- (id)init {
+- (instancetype)init {
     @throw [NSException exceptionWithName:@"OCFInvalidInitializer" reason:nil userInfo:nil];
 }
 
