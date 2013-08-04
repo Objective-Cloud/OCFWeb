@@ -19,22 +19,22 @@
 		AB94265217AE51DB0053D2F6 /* NSDictionary+OCFConfigurationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AB94263C17AE51DB0053D2F6 /* NSDictionary+OCFConfigurationAdditions.m */; };
 		AB94265317AE51DB0053D2F6 /* OCFMethodRoutesPair.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94263D17AE51DB0053D2F6 /* OCFMethodRoutesPair.h */; };
 		AB94265417AE51DB0053D2F6 /* OCFMethodRoutesPair.m in Sources */ = {isa = PBXBuildFile; fileRef = AB94263E17AE51DB0053D2F6 /* OCFMethodRoutesPair.m */; };
-		AB94265517AE51DB0053D2F6 /* OCFMustache.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94263F17AE51DB0053D2F6 /* OCFMustache.h */; };
+		AB94265517AE51DB0053D2F6 /* OCFMustache.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94263F17AE51DB0053D2F6 /* OCFMustache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB94265617AE51DB0053D2F6 /* OCFMustache.m in Sources */ = {isa = PBXBuildFile; fileRef = AB94264017AE51DB0053D2F6 /* OCFMustache.m */; };
 		AB94265717AE51DB0053D2F6 /* OCFRequest_Extension.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94264117AE51DB0053D2F6 /* OCFRequest_Extension.h */; };
-		AB94265817AE51DB0053D2F6 /* OCFRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94264217AE51DB0053D2F6 /* OCFRequest.h */; };
+		AB94265817AE51DB0053D2F6 /* OCFRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94264217AE51DB0053D2F6 /* OCFRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB94265917AE51DB0053D2F6 /* OCFRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AB94264317AE51DB0053D2F6 /* OCFRequest.m */; };
 		AB94265A17AE51DB0053D2F6 /* OCFRequest+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94264417AE51DB0053D2F6 /* OCFRequest+Private.h */; };
 		AB94265B17AE51DB0053D2F6 /* OCFRequest+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = AB94264517AE51DB0053D2F6 /* OCFRequest+Private.m */; };
-		AB94265C17AE51DB0053D2F6 /* OCFResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94264617AE51DB0053D2F6 /* OCFResponse.h */; };
+		AB94265C17AE51DB0053D2F6 /* OCFResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94264617AE51DB0053D2F6 /* OCFResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB94265D17AE51DB0053D2F6 /* OCFResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AB94264717AE51DB0053D2F6 /* OCFResponse.m */; };
 		AB94265E17AE51DB0053D2F6 /* OCFRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94264817AE51DB0053D2F6 /* OCFRoute.h */; };
 		AB94265F17AE51DB0053D2F6 /* OCFRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = AB94264917AE51DB0053D2F6 /* OCFRoute.m */; };
 		AB94266017AE51DB0053D2F6 /* OCFRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94264A17AE51DB0053D2F6 /* OCFRouter.h */; };
 		AB94266117AE51DB0053D2F6 /* OCFRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = AB94264B17AE51DB0053D2F6 /* OCFRouter.m */; };
-		AB94266217AE51DB0053D2F6 /* OCFWebApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94264C17AE51DB0053D2F6 /* OCFWebApplication.h */; };
+		AB94266217AE51DB0053D2F6 /* OCFWebApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94264C17AE51DB0053D2F6 /* OCFWebApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB94266317AE51DB0053D2F6 /* OCFWebApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = AB94264D17AE51DB0053D2F6 /* OCFWebApplication.m */; };
-		AB94266417AE51DB0053D2F6 /* OCFWebApplicationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94264E17AE51DB0053D2F6 /* OCFWebApplicationDelegate.h */; };
+		AB94266417AE51DB0053D2F6 /* OCFWebApplicationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94264E17AE51DB0053D2F6 /* OCFWebApplicationDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB94266517AE51DB0053D2F6 /* OCFWebServerRequest+OCFWebAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94264F17AE51DB0053D2F6 /* OCFWebServerRequest+OCFWebAdditions.h */; };
 		AB94266617AE51DB0053D2F6 /* OCFWebServerRequest+OCFWebAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AB94265017AE51DB0053D2F6 /* OCFWebServerRequest+OCFWebAdditions.m */; };
 		AB94266917AE53E70053D2F6 /* OCFWeb.h in Headers */ = {isa = PBXBuildFile; fileRef = AB94261B17AE51AB0053D2F6 /* OCFWeb.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -339,17 +339,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB94266917AE53E70053D2F6 /* OCFWeb.h in Headers */,
-				AB94265117AE51DB0053D2F6 /* NSDictionary+OCFConfigurationAdditions.h in Headers */,
-				AB94265317AE51DB0053D2F6 /* OCFMethodRoutesPair.h in Headers */,
 				AB94265517AE51DB0053D2F6 /* OCFMustache.h in Headers */,
-				AB94265717AE51DB0053D2F6 /* OCFRequest_Extension.h in Headers */,
 				AB94265817AE51DB0053D2F6 /* OCFRequest.h in Headers */,
-				AB94265A17AE51DB0053D2F6 /* OCFRequest+Private.h in Headers */,
 				AB94265C17AE51DB0053D2F6 /* OCFResponse.h in Headers */,
-				AB94265E17AE51DB0053D2F6 /* OCFRoute.h in Headers */,
-				AB94266017AE51DB0053D2F6 /* OCFRouter.h in Headers */,
 				AB94266217AE51DB0053D2F6 /* OCFWebApplication.h in Headers */,
 				AB94266417AE51DB0053D2F6 /* OCFWebApplicationDelegate.h in Headers */,
+				AB94265117AE51DB0053D2F6 /* NSDictionary+OCFConfigurationAdditions.h in Headers */,
+				AB94265317AE51DB0053D2F6 /* OCFMethodRoutesPair.h in Headers */,
+				AB94265717AE51DB0053D2F6 /* OCFRequest_Extension.h in Headers */,
+				AB94265A17AE51DB0053D2F6 /* OCFRequest+Private.h in Headers */,
+				AB94265E17AE51DB0053D2F6 /* OCFRoute.h in Headers */,
+				AB94266017AE51DB0053D2F6 /* OCFRouter.h in Headers */,
 				AB94266517AE51DB0053D2F6 /* OCFWebServerRequest+OCFWebAdditions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -623,6 +623,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OCFWeb/OCFWeb-Prefix.pch";
 				INFOPLIST_FILE = "OCFWeb/OCFWeb-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -639,6 +640,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OCFWeb/OCFWeb-Prefix.pch";
 				INFOPLIST_FILE = "OCFWeb/OCFWeb-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};

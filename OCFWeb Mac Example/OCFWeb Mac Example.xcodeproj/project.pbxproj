@@ -14,6 +14,7 @@
 		AB9425F817AE512C0053D2F6 /* OCFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9425F717AE512C0053D2F6 /* OCFAppDelegate.m */; };
 		AB9425FB17AE512C0053D2F6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB9425F917AE512C0053D2F6 /* MainMenu.xib */; };
 		AB94266817AE51E70053D2F6 /* OCFWeb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB94266717AE51E70053D2F6 /* OCFWeb.framework */; };
+		AB94268217AE6B530053D2F6 /* Persons.mustache in Resources */ = {isa = PBXBuildFile; fileRef = AB94268017AE6B530053D2F6 /* Persons.mustache */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		AB9425F717AE512C0053D2F6 /* OCFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCFAppDelegate.m; sourceTree = "<group>"; };
 		AB9425FA17AE512C0053D2F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		AB94266717AE51E70053D2F6 /* OCFWeb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCFWeb.framework; path = ../OCFWeb/build/Release/OCFWeb.framework; sourceTree = "<group>"; };
+		AB94268117AE6B530053D2F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/Persons.mustache; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				AB9425F017AE512C0053D2F6 /* main.m */,
 				AB9425F217AE512C0053D2F6 /* OCFWeb Mac Example-Prefix.pch */,
 				AB9425F317AE512C0053D2F6 /* Credits.rtf */,
+				AB94268017AE6B530053D2F6 /* Persons.mustache */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 				AB9425EF17AE512C0053D2F6 /* InfoPlist.strings in Resources */,
 				AB9425F517AE512C0053D2F6 /* Credits.rtf in Resources */,
 				AB9425FB17AE512C0053D2F6 /* MainMenu.xib in Resources */,
+				AB94268217AE6B530053D2F6 /* Persons.mustache in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +205,14 @@
 				AB9425FA17AE512C0053D2F6 /* en */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		AB94268017AE6B530053D2F6 /* Persons.mustache */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB94268117AE6B530053D2F6 /* en */,
+			);
+			name = Persons.mustache;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
