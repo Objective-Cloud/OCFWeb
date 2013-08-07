@@ -5,32 +5,31 @@ OCFWeb is a web application framework written in Objective-C. You can use OCFWeb
 
 # Example: Hello World
 The following code snippet shows you how to create a web application that responds to GET requests made to `/`.
-
 ```objective-c
-    @interface AppDelegate ()
-    @property (nonatomic, strong) OCFWebApplication *app;
-    @end
+@interface AppDelegate ()
+@property (nonatomic, strong) OCFWebApplication *app;
+@end
 
-    @implementation AppDelegate 
+@implementation AppDelegate 
 
-    - (void)applicationDidFinishLaunching:(NSNotification *)n {
-      // Create a instance of OCFWebApplication
-      self.app = [OCFWebApplication new];
+- (void)applicationDidFinishLaunching:(NSNotification *)n {
+  // Create a instance of OCFWebApplication
+  self.app = [OCFWebApplication new];
+  
+  // Add a handler for GET requests
+  self.app[@"GET"][@"/"]  = ^(OCFRequest *request) {
+    // request contains a lot of properties which describe the incoming request.
+    // Respond to the request:
+
+    request.respondWith(@"Hello World");
+  };
       
-      // Add a handler for GET requests
-      self.app[@"GET"][@"/"]  = ^(OCFRequest *request) {
-        // request contains a lot of properties which describe the incoming request.
-        
-        // Respond to the request:
-        request.respondWith(@"Hello World");
-      };
-      
-      // Run your app on port 8080
-      [self.app runOnPort:8080];
-    }
-    @end
+  // Run your app on port 8080
+  [self.app runOnPort:8080];
+}
+
+@end
 ```
-
 Opening [http://127.0.0.1:8080/](http://127.0.0.1:8080/) in your browser should show a web site with the words "Hello World" on it. Nice isn't it? Let's examine the code a little bit more:
 
 * First you create an instance of `OCFWebApplication` by using the `+new` class method. This creates a blank web application for you that does nothing useful.
@@ -65,7 +64,7 @@ Developing a web application framework is hard. There are a lot of things that h
 * Be open for compromises: Let's face it: A web application framework with under 1K lines of code can't handle everything. In fact, such a small framework can only handle a couple of well chosen scenarios. At the moment there is no built in support for HTTP sessions, cookies, authentication, encryption, HTTPS, persistence and security. OCFWeb was not designed to be exposed to the internet. At [Objective-Cloud.com](http://objective-cloud.com) we have proxies in front of every (OCF) web application to eliminate the critical missing bits and pieces. If you are embedding OCFWeb in your own app it is a good idea to let the user control the lifetime of your web app.
 
 # Response Types
-The first example shows how easy it is to create a response for an incoming request. As you can see the handler block assigned to the `GET /` route. The moment the handler block has created/computed a response object it is passed to your instance of `OCFWebApplication` by executing the respondWith-block: `request.respondWith(response)`. It has already been mentioned that the only parameter of the respondWith-block is typed with `id`. This allows you to pass different kinds of response objects: In some situations a simple string is a good response and in some other situations you might need something more sophisticated. These are the different kind of response objects you can return:
+The first example shows how easy it is to create a response for an incoming request. As you can see the handler block is assigned to the `GET /` route. The moment the handler block has created/computed a response object it is passed to your instance of `OCFWebApplication` by executing the respondWith-block: `request.respondWith(response)`. It has already been mentioned that the only parameter of the respondWith-block is typed with `id`. This allows you to pass different kinds of response objects: In some situations a simple string is a good response and in some other situations you might need something more sophisticated. These are the different kind of response objects you can return:
 
 * A simple string: This will create a HTTP response with a status code of 201, content type will be plain/text and the body will be the unicode representation of the string you returned.
 * A dictionary: This allows you to specify a custom status code, body and custom headers. The returned dictionary should look something like this: `@{@"status" : @201, @"headers": @{"Content-type" : @"image/tiff" }, @"body" : [image TIFFRepresentation]}`
@@ -75,39 +74,43 @@ The first example shows how easy it is to create a response for an incoming requ
 ## Example: String Response
 The following example shows how to create a response by returning a simple string.
 
-    self.app = [OCFWebApplication new];    
-    self.app[@"GET"][@"/"] = ^(OCFRequest *request) {
-      request.respondWith(@{ @"Hello World. I am a string." });
-    };
-    [self.application runOnPort:8080];
+```objective-c
+self.app = [OCFWebApplication new];    
+self.app[@"GET"][@"/"] = ^(OCFRequest *request) {
+  request.respondWith(@{ @"Hello World. I am a string." });
+};
+[self.application runOnPort:8080];
+```
 
 This creates a `plain/text` response with a status code of 201. If you don't like the content type or status code for string responses you can change it on a per application basis.
 
 ## Example: Dictionary Response
 The following example shows how to create a response by returning a dictionary. If you run this example you should be able to use your browser to access the web application which should display your application icon.
-
-    self.app = [OCFWebApplication new];    
-    self.app[@"GET"][@"/"] = ^(OCFRequest *request) {
-      NSImage *image = [NSImage imageNamed:@"NSApplicationIcon"];
-      request.respondWith(@{ @"status" : @201,
-                             @"body" : [image TIFFRepresentation],
-                             @"headers" : @{ @"Content-Type" : @"image/tiff" }});
-    };
-    [self.application runOnPort:8080];
-
+```objective-c
+self.app = [OCFWebApplication new];    
+self.app[@"GET"][@"/"] = ^(OCFRequest *request) {
+  NSImage *image = [NSImage imageNamed:@"NSApplicationIcon"];
+  request.respondWith(@{ @"status" : @201,
+                         @"body" : [image TIFFRepresentation],
+                         @"headers" : @{ @"Content-Type" : @"image/tiff" }});
+};
+[self.application runOnPort:8080];
+```
 ## Example: Mustache Response
 For the following example to work there must be a file called `Detail.mustache` in the resources of your application. Before using a mustache response you should read the [documentation of the mustache library used by OCFWeb](https://github.com/groue/GRMustache#grmustache). A mustache file basically contains text with placeholders and the underlying mustache engine can automatically fill in the details for you.
 
-    self.app = [OCFWebApplication new];
-    self.app[@"GET"][@"/"]  = ^(OCFRequest *request) {
-      NSDictionary *person = @{ @"id" : @1,
-                                @"firstName" : @"Christian",
-                                @"lastName" : @"Kienle" };
-      OCFMustache *response = [OCFMustache newMustacheWithName:@"Detail"
-                                                        object:person];
-      request.respondWith(response);
-    };
-    [self.app runOnPort:8080];
+```objective-c
+self.app = [OCFWebApplication new];
+self.app[@"GET"][@"/"]  = ^(OCFRequest *request) {
+  NSDictionary *person = @{ @"id" : @1,
+                            @"firstName" : @"Christian",
+                            @"lastName" : @"Kienle" };
+  OCFMustache *response = [OCFMustache newMustacheWithName:@"Detail"
+                                                    object:person];
+  request.respondWith(response);
+};
+[self.app runOnPort:8080];
+```
 
 # Routing and Parameters
 When adding a request handler you have to specify a HTTP method and a path. In the examples above we used `GET` as the HTTP method and `/` as the path. OCFWeb let's you do more sophisticated things though.
@@ -125,11 +128,13 @@ Let's assume you want to add and implement a handler that displays a specific st
 ## Example: A Route with Placeholders
 The following example shows you how to register a handler that is only executed if the request path is matching a specific pattern.
 
-    self.app = [OCFWebApplication new];
-    self.app[@"GET"][@"/countries/:country/states/:state/"] = ^(OCFRequest *request) {
-      request.respondWith([request.parameters description]);
-    };
-    [self.application run];
+```objective-c
+self.app = [OCFWebApplication new];
+self.app[@"GET"][@"/countries/:country/states/:state/"] = ^(OCFRequest *request) {
+  request.respondWith([request.parameters description]);
+};
+[self.application run];
+```
 
 The pattern used (`/countries/:country/states/:state/`) has two placeholders:
 
