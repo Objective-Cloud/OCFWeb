@@ -16,7 +16,11 @@
     @throw [NSException exceptionWithName:@"OCFInvalidInitializer" reason:nil userInfo:nil];
 }
 
-#pragma mark - Creating Response Objects from Request Objects
+#pragma mark - Responding
+- (void)respondWith:(OCFResponse *)response {
+    self.respondWith ? self.respondWith(response) : nil;
+}
+
 - (OCFResponse *)redirectedTo:(NSString *)path {
     NSString *resultingPath = (path != nil ? path : @"/");
     NSString *location = [[NSURL URLWithString:resultingPath relativeToURL:self.URL] absoluteString];
@@ -25,6 +29,8 @@
                                                   @"Content-Length" : @"0" }
                                           body:nil];
 }
+
+
 
 #pragma mark - NSObject
 - (NSString *)description {

@@ -21,10 +21,10 @@ typedef void(^OCFResponseHandler)(id response);
 @property (nonatomic, copy, readonly) NSData *data; // not the raw contents of the request
 @property (nonatomic, copy, readonly) NSDictionary *parameters; // union of GET, POST and Pattern-Parameters
 
-#pragma mark - Properties not related to HTTP
-@property (nonatomic, copy) OCFResponseHandler respondWith;
 
-#pragma mark - Creating Response Objects from Request Objects
+#pragma mark - Responding
+@property (nonatomic, copy) OCFResponseHandler respondWith;
+- (void)respondWith:(OCFResponse *)response;
 - (OCFResponse *)redirectedTo:(NSString *)path;
 
 @end

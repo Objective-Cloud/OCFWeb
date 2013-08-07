@@ -6,6 +6,7 @@ OCFWeb is a web application framework written in Objective-C. You can use OCFWeb
 # Example: Hello World
 The following code snippet shows you how to create a web application that responds to GET requests made to `/`.
 
+```objective-c
     @interface AppDelegate ()
     @property (nonatomic, strong) OCFWebApplication *app;
     @end
@@ -28,6 +29,7 @@ The following code snippet shows you how to create a web application that respon
       [self.app runOnPort:8080];
     }
     @end
+```
 
 Opening [http://127.0.0.1:8080/](http://127.0.0.1:8080/) in your browser should show a web site with the words "Hello World" on it. Nice isn't it? Let's examine the code a little bit more:
 
