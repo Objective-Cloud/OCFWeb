@@ -7,18 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB6A10AB17D0D85100D13A0F /* OCFWeb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6A10AA17D0D85100D13A0F /* OCFWeb.framework */; };
+		AB6A10AC17D0D85800D13A0F /* OCFWeb.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = AB6A10AA17D0D85100D13A0F /* OCFWeb.framework */; };
 		AB9425E517AE512C0053D2F6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB9425E417AE512C0053D2F6 /* Cocoa.framework */; };
 		AB9425EF17AE512C0053D2F6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB9425ED17AE512C0053D2F6 /* InfoPlist.strings */; };
 		AB9425F117AE512C0053D2F6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9425F017AE512C0053D2F6 /* main.m */; };
 		AB9425F517AE512C0053D2F6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AB9425F317AE512C0053D2F6 /* Credits.rtf */; };
 		AB9425F817AE512C0053D2F6 /* OCFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9425F717AE512C0053D2F6 /* OCFAppDelegate.m */; };
 		AB9425FB17AE512C0053D2F6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB9425F917AE512C0053D2F6 /* MainMenu.xib */; };
-		AB94266817AE51E70053D2F6 /* OCFWeb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB94266717AE51E70053D2F6 /* OCFWeb.framework */; };
 		AB94268217AE6B530053D2F6 /* Persons.mustache in Resources */ = {isa = PBXBuildFile; fileRef = AB94268017AE6B530053D2F6 /* Persons.mustache */; };
 		AB94268917AE7BE80053D2F6 /* PersonDetail.mustache in Resources */ = {isa = PBXBuildFile; fileRef = AB94268717AE7BE80053D2F6 /* PersonDetail.mustache */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		AB6A10A817D0D81A00D13A0F /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AB6A10AC17D0D85800D13A0F /* OCFWeb.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		AB6A10AA17D0D85100D13A0F /* OCFWeb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCFWeb.framework; path = "../../../Library/Developer/Xcode/DerivedData/OCFWeb-evubwishqoxzsxfsmvxurbhjycvc/Build/Products/Debug/OCFWeb.framework"; sourceTree = "<group>"; };
 		AB9425E117AE512C0053D2F6 /* OCFWeb Mac Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OCFWeb Mac Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB9425E417AE512C0053D2F6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		AB9425E717AE512C0053D2F6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -32,7 +48,6 @@
 		AB9425F617AE512C0053D2F6 /* OCFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCFAppDelegate.h; sourceTree = "<group>"; };
 		AB9425F717AE512C0053D2F6 /* OCFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCFAppDelegate.m; sourceTree = "<group>"; };
 		AB9425FA17AE512C0053D2F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		AB94266717AE51E70053D2F6 /* OCFWeb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCFWeb.framework; path = ../OCFWeb/build/Release/OCFWeb.framework; sourceTree = "<group>"; };
 		AB94268117AE6B530053D2F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/Persons.mustache; sourceTree = "<group>"; };
 		AB94268817AE7BE80053D2F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/PersonDetail.mustache; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -42,7 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB94266817AE51E70053D2F6 /* OCFWeb.framework in Frameworks */,
+				AB6A10AB17D0D85100D13A0F /* OCFWeb.framework in Frameworks */,
 				AB9425E517AE512C0053D2F6 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -53,7 +68,7 @@
 		AB9425D817AE512C0053D2F6 = {
 			isa = PBXGroup;
 			children = (
-				AB94266717AE51E70053D2F6 /* OCFWeb.framework */,
+				AB6A10AA17D0D85100D13A0F /* OCFWeb.framework */,
 				AB9425EA17AE512C0053D2F6 /* OCFWeb Mac Example */,
 				AB9425E317AE512C0053D2F6 /* Frameworks */,
 				AB9425E217AE512C0053D2F6 /* Products */,
@@ -122,6 +137,7 @@
 				AB9425DD17AE512C0053D2F6 /* Sources */,
 				AB9425DE17AE512C0053D2F6 /* Frameworks */,
 				AB9425DF17AE512C0053D2F6 /* Resources */,
+				AB6A10A817D0D81A00D13A0F /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -293,6 +309,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/OCFWeb-evubwishqoxzsxfsmvxurbhjycvc/Build/Products/Debug\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OCFWeb Mac Example/OCFWeb Mac Example-Prefix.pch";
 				INFOPLIST_FILE = "OCFWeb Mac Example/OCFWeb Mac Example-Info.plist";
@@ -305,6 +325,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/OCFWeb-evubwishqoxzsxfsmvxurbhjycvc/Build/Products/Debug\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OCFWeb Mac Example/OCFWeb Mac Example-Prefix.pch";
 				INFOPLIST_FILE = "OCFWeb Mac Example/OCFWeb Mac Example-Info.plist";

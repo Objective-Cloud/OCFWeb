@@ -12,22 +12,22 @@
 @implementation OCFAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
-    self.persons = [@[ [@{ @"id" : @1, @"firstName" : @"Christian", @"lastName" : @"Kienle" } mutableCopy],
-                       [@{ @"id" : @2, @"firstName" : @"Amin", @"lastName" : @"Negm-awad" } mutableCopy],
-                       [@{ @"id" : @3, @"firstName" : @"Bill", @"lastName" : @"Gates" } mutableCopy] ] mutableCopy];
-
+    self.persons = [@[ [@{ @"id" : @"1", @"firstName" : @"Christian", @"lastName" : @"Kienle" } mutableCopy],
+                    [@{ @"id" : @"2", @"firstName" : @"Amin", @"lastName" : @"Negm-awad" } mutableCopy],
+                    [@{ @"id" : @"3", @"firstName" : @"Bill", @"lastName" : @"Gates" } mutableCopy] ] mutableCopy];
+    
     self.app = [OCFWebApplication new];
-
+    
     self.app[@"GET"][@"/persons"]  = ^(OCFRequest *request) {
         request.respondWith([OCFMustache newMustacheWithName:@"Persons" object:@{@"persons" : self.persons}]);
     };
     
     self.app[@"GET"][@"/persons/:id"]  = ^(OCFRequest *request) {
-        NSNumber *personID = @([request.parameters[@"id"] integerValue]);
+        NSString *personID = request.parameters[@"id"];
         
         // Find the person
         for(NSDictionary *person in self.persons) {
-            if([person[@"id"] isEqualToNumber:personID]) {
+            if([person[@"id"] isEqualToString:personID]) {
                 request.respondWith([OCFMustache newMustacheWithName:@"PersonDetail" object:person]);
                 return; // person found
             }
@@ -42,11 +42,11 @@
         
         request.respondWith([request redirectedTo:@"/persons"]);
     };
-
+    
     self.app[@"PUT"][@"/persons/:id"]  = ^(OCFRequest *request) {
-        NSNumber *personID = @([request.parameters[@"id"] integerValue]);
+        NSString *personID = request.parameters[@"id"];
         for(NSMutableDictionary *person in self.persons) {
-            if([person[@"id"] isEqualToNumber:personID]) {
+            if([person[@"id"] isEqualToString:personID]) {
                 [person setValuesForKeysWithDictionary:request.parameters];
                 request.respondWith([request redirectedTo:@"/persons"]);
                 return; // person updated
@@ -55,11 +55,12 @@
         request.respondWith(@"Error: No Person found");
     };
     
-        [self.app run];
+    [self.app run];
     
     NSString *address = [NSString stringWithFormat:@"http://127.0.0.1:%lu/persons", self.app.port];
     NSURL *result = [NSURL URLWithString:address];
     [[NSWorkspace sharedWorkspace] openURL:result];
 }
+
 
 @end
