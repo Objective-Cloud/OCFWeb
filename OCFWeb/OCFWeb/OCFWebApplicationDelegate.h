@@ -11,6 +11,6 @@
 
 @optional
 - (OCFResponse *)application:(OCFWebApplication *)application willDeliverResponse:(OCFResponse *)response;
-- (OCFResponse *)application:(OCFWebApplication *)application responseForRequestWithNoAssociatedHandler:(OCFRequest *)request;
+- (void)application:(OCFWebApplication *)application asynchronousResponseForRequestWithNoAssociatedHandler:(OCFRequest *)request;
 
 @end

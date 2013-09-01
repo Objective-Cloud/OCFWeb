@@ -49,6 +49,11 @@
 
 @implementation OCFWebServerMultiPartFormRequest (OCFAdditions)
 
+#pragma mark - Convenience
+- (NSData *)data_ocf {
+    return self.data;
+}
+
 #pragma mark - Additional Parameters
 - (NSDictionary *)additionalParameters_ocf {
     NSMutableDictionary *result = [NSMutableDictionary new];

@@ -9,6 +9,7 @@
 #import "OCFResponse.h"
 #import "OCFMustache.h"
 #import "OCFRequest+Private.h"
+#import "OCFRequest_Extension.h"
 
 #import "NSDictionary+OCFConfigurationAdditions.h"
 #import "OCFWebServerRequest+OCFWebAdditions.h"
@@ -27,7 +28,7 @@
 
 @end
 
-@implementation OCFWebApplication 
+@implementation OCFWebApplication
 //+ (void)initialize
 //{
 //    if(self == [SinApplication class])
@@ -36,7 +37,7 @@
 //        // Debug configuration: keep GRMustache quiet
 //        [GRMustache preventNSUndefinedKeyExceptionAttack];
 //#endif
-//        
+//
 //    }
 //}
 
@@ -54,7 +55,7 @@
         [self _setupDefaultConfiguration];
     }
     return self;
-
+    
 }
 
 - (instancetype)init {
@@ -65,7 +66,7 @@
     NSDictionary *staticHeaders = @{ @"X-XSS-Protection" : @"1; mode=block",
                                      @"X-Content-Type-Options" : @"nosniff",
                                      @"X-Frame-Options" : @"SAMEORIGIN"
-                                   };
+                                     };
     self.configuration = @{ @"status" : @200, @"headers" : staticHeaders, @"contentType" : @"text/html;charset=utf-8" };
 }
 
@@ -89,6 +90,53 @@
 #pragma mark - Controlling the Application
 - (void)run {
     [self runOnPort:0];
+}
+
+- (void)_handleResponse:(id)response responseBlock:(OCFWebServerResponseBlock)responseBlock {
+    __typeof__(self) __weak weakSelf = self;
+    if([response isKindOfClass:[OCFResponse class]]) {
+        responseBlock([weakSelf makeValidWebServerResponseWithResponse:response]);
+        return;
+    }
+    
+    if([response isKindOfClass:[NSString class]]) {
+        OCFResponse *webRequest = [[OCFResponse alloc] initWithStatus:0 headers:nil body:[response dataUsingEncoding:NSUTF8StringEncoding]];
+        responseBlock([weakSelf makeValidWebServerResponseWithResponse:webRequest]);
+        return;
+    }
+    
+    if([response isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *dictionaryResponse = response;
+        OCFResponse *webResponse = [[OCFResponse alloc] initWithProperties:dictionaryResponse];
+        responseBlock([weakSelf makeValidWebServerResponseWithResponse:webResponse]);
+        return;
+    }
+    
+    if([response isKindOfClass:[OCFMustache class]]) {
+        OCFMustache *mustache = response;
+        
+        // Evaluate
+        NSError *repositoryError = nil;
+        GRMustacheTemplate *template = [weakSelf.templateRepository templateNamed:mustache.name error:&repositoryError];
+        if(template == nil) {
+            NSLog(@"Failed to load templace: %@", repositoryError);
+            responseBlock(nil);
+            return;
+        }
+        
+        NSError *renderError = nil;
+        NSString *renderedObject = [template renderObject:mustache.object error:&renderError];
+        if(renderedObject == nil) {
+            NSLog(@"Failed to render object (%@): %@", mustache.object, renderError);
+            responseBlock(nil);
+            return;
+        }
+        
+        OCFResponse *webResponse = [[OCFResponse alloc] initWithStatus:200 headers:nil body:[renderedObject dataUsingEncoding:NSUTF8StringEncoding]];
+        responseBlock([weakSelf makeValidWebServerResponseWithResponse:webResponse]);
+        return;
+    }
+    responseBlock(nil);
 }
 
 - (void)runOnPort:(NSUInteger)port {
@@ -133,66 +181,30 @@
         if(route == nil) {
             NSLog(@"[WebApplication] No route found for %@ %@.", request.method, request.path);
             OCFResponse *response = nil;
-            if(weakSelf.delegate != nil && [weakSelf.delegate respondsToSelector:@selector(application:responseForRequestWithNoAssociatedHandler:)]) {
+            if(weakSelf.delegate != nil && [weakSelf.delegate respondsToSelector:@selector(application:asynchronousResponseForRequestWithNoAssociatedHandler:)]) {
                 OCFRequest *webRequest = [[OCFRequest alloc] initWithWebServerRequest:request parameters:nil];
-                response = [weakSelf.delegate application:weakSelf responseForRequestWithNoAssociatedHandler:webRequest];
+                webRequest.method = requestMethod;
+                [webRequest setRespondWith:^(id response) {
+                    if(response == nil) {
+                        response = [[OCFResponse alloc] initWithStatus:404 headers:nil body:nil];
+                    }
+                    [weakSelf _handleResponse:response responseBlock:responseBlock];
+                }];
+                [weakSelf.delegate application:weakSelf asynchronousResponseForRequestWithNoAssociatedHandler:webRequest];
             } else {
                 // The delegate did not return anything useful so we have to generate a 404 response
                 response = [[OCFResponse alloc] initWithStatus:404 headers:nil body:nil];
+                [weakSelf _handleResponse:response responseBlock:responseBlock];
+                return;
             }
-            
-            responseBlock([weakSelf makeValidWebServerResponseWithResponse:response]);
             return;
         }
         
         NSDictionary *parameters = [weakSelf parametersFromRequest:request withRoute:route];
-
+        
         OCFRequest *webRequest = [[OCFRequest alloc] initWithWebServerRequest:request parameters:parameters];
         [webRequest setRespondWith:^(id response) {
-            if([response isKindOfClass:[OCFResponse class]]) {
-                responseBlock([weakSelf makeValidWebServerResponseWithResponse:response]);
-                return;
-            }
-            
-            if([response isKindOfClass:[NSString class]]) {
-                OCFResponse *webRequest = [[OCFResponse alloc] initWithStatus:0 headers:nil body:[response dataUsingEncoding:NSUTF8StringEncoding]];
-                responseBlock([weakSelf makeValidWebServerResponseWithResponse:webRequest]);
-                return;
-            }
-            
-            if([response isKindOfClass:[NSDictionary class]]) {
-                NSDictionary *dictionaryResponse = response;
-                OCFResponse *webResponse = [[OCFResponse alloc] initWithProperties:dictionaryResponse];
-                responseBlock([weakSelf makeValidWebServerResponseWithResponse:webResponse]);
-                return;
-            }
-            
-            if([response isKindOfClass:[OCFMustache class]]) {
-                OCFMustache *mustache = response;
-                
-                // Evaluate
-                NSError *repositoryError = nil;
-                GRMustacheTemplate *template = [weakSelf.templateRepository templateNamed:mustache.name error:&repositoryError];
-                if(template == nil) {
-                    NSLog(@"Failed to load templace: %@", repositoryError);
-                    responseBlock(nil);
-                    return;
-                }
-                
-                NSError *renderError = nil;
-                NSString *renderedObject = [template renderObject:mustache.object error:&renderError];
-                if(renderedObject == nil) {
-                    NSLog(@"Failed to render object (%@): %@", mustache.object, renderError);
-                    responseBlock(nil);
-                    return;
-                }
-                
-                OCFResponse *webResponse = [[OCFResponse alloc] initWithStatus:200 headers:nil body:[renderedObject dataUsingEncoding:NSUTF8StringEncoding]];
-                responseBlock([weakSelf makeValidWebServerResponseWithResponse:webResponse]);
-                return;
-            }
-            responseBlock(nil); // FIXME: Terrasphere crashes
-            return;
+            [weakSelf _handleResponse:response responseBlock:responseBlock];
         }];
         
         route.requestHandler(webRequest);
@@ -218,7 +230,7 @@
 //           This method SHOULD return a respons which is valid according to the configuration.
 - (OCFResponse *)willDeliverResponse:(OCFResponse *)response {
     OCFResponse *result = response;
-
+    
     // Ask the Delegate first
     if([self.delegate respondsToSelector:@selector(application:willDeliverResponse:)]) {
         OCFResponse *responseFromDelegate = [self.delegate application:self willDeliverResponse:response];
@@ -265,7 +277,7 @@
     }
     
     [mutableHeaders addEntriesFromDictionary:self.configuration.defaultHeaders_ocf];
-        
+    
     OCFResponse *validResponse = [[OCFResponse alloc] initWithStatus:status headers:mutableHeaders body:response.body];
     return validResponse;
 }
