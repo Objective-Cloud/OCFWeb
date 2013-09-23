@@ -17,7 +17,7 @@
 }
 
 #pragma mark - Responding
-- (void)respondWith:(OCFResponse *)response {
+- (void)respondWith:(id)response {
     self.respondWith ? self.respondWith(response) : nil;
 }
 
@@ -28,6 +28,12 @@
                                        headers:@{ @"Location" : location,
                                                   @"Content-Length" : @"0" }
                                           body:nil];
+}
+
+- (void)respondBadRequestStatusWithBody:(NSData *)body {
+  [self respondWith:@{@"status" : @400,
+                      @"body" : body,
+                      @"headers": @{@"Content-Type" : @"application/json"}}];
 }
 
 

@@ -24,7 +24,13 @@ typedef void(^OCFResponseHandler)(id response);
 
 #pragma mark - Responding
 @property (nonatomic, copy) OCFResponseHandler respondWith;
-- (void)respondWith:(OCFResponse *)response;
+- (void)respondWith:(id)response;
 - (OCFResponse *)redirectedTo:(NSString *)path;
+
+// This method is bad:
+// 1. Is assumes that body contains JSON data
+// 2. Its name is confusing
+// Because of that this method will be replaced with something else soon. Don't use it.
+- (void)respondBadRequestStatusWithBody:(NSData *)body; // TODO: make it better
 
 @end
