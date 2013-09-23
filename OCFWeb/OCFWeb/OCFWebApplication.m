@@ -19,7 +19,6 @@
 #import <OCFWebServer/OCFWebServer.h>
 #import <OCFWebServer/OCFWebServerResponse.h>
 #import <OCFWebServer/OCFWebServerRequest.h>
-#import <OCFWebServer/OCFWebServerRequest_Types.h>
 
 @interface OCFWebApplication ()
 
