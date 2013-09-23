@@ -37,7 +37,7 @@
     
     self.app[@"POST"][@"/persons"]  = ^(OCFRequest *request) {
         NSMutableDictionary *person = [NSMutableDictionary dictionaryWithDictionary:request.parameters];
-        person[@"id"] = @(self.persons.count + 1);
+        person[@"id"] = [@(self.persons.count + 1) stringValue];
         [self.persons addObject:person];
         
         request.respondWith([request redirectedTo:@"/persons"]);
